@@ -5,9 +5,46 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BC792411-E546-4C57-B36B-2345056B3439}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B1BA87A1-C82E-4019-AB66-F78B2EC6C072}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{C99857B9-A04A-4647-ACA7-A821E31D8797}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContactService", "ContactService", "{EB5AA7AF-36D9-4677-96DB-0520167006F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssessmentPhoneDirectory.Contact.Api", "src\Service\ContactService\AssessmentPhoneDirectory.Contact.Api\AssessmentPhoneDirectory.Contact.Api.csproj", "{E2D3B92D-A551-4288-A176-DCCFEE8C2E20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssessmentPhoneDirectory.Contact.Infrastructure", "src\Service\ContactService\AssessmentPhoneDirectory.Contact.Infrastructure\AssessmentPhoneDirectory.Contact.Infrastructure.csproj", "{6D837B57-59C5-4685-AB0C-52F375B8DD49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssessmentPhoneDirectory.Contact.Manager", "src\Service\ContactService\AssessmentPhoneDirectory.Contact.Manager\AssessmentPhoneDirectory.Contact.Manager.csproj", "{1E72B027-D155-4A5B-9F04-291EA16DF91F}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2D3B92D-A551-4288-A176-DCCFEE8C2E20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2D3B92D-A551-4288-A176-DCCFEE8C2E20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2D3B92D-A551-4288-A176-DCCFEE8C2E20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2D3B92D-A551-4288-A176-DCCFEE8C2E20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D837B57-59C5-4685-AB0C-52F375B8DD49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D837B57-59C5-4685-AB0C-52F375B8DD49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D837B57-59C5-4685-AB0C-52F375B8DD49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D837B57-59C5-4685-AB0C-52F375B8DD49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E72B027-D155-4A5B-9F04-291EA16DF91F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E72B027-D155-4A5B-9F04-291EA16DF91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E72B027-D155-4A5B-9F04-291EA16DF91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E72B027-D155-4A5B-9F04-291EA16DF91F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C99857B9-A04A-4647-ACA7-A821E31D8797} = {B1BA87A1-C82E-4019-AB66-F78B2EC6C072}
+		{EB5AA7AF-36D9-4677-96DB-0520167006F1} = {C99857B9-A04A-4647-ACA7-A821E31D8797}
+		{E2D3B92D-A551-4288-A176-DCCFEE8C2E20} = {EB5AA7AF-36D9-4677-96DB-0520167006F1}
+		{6D837B57-59C5-4685-AB0C-52F375B8DD49} = {EB5AA7AF-36D9-4677-96DB-0520167006F1}
+		{1E72B027-D155-4A5B-9F04-291EA16DF91F} = {EB5AA7AF-36D9-4677-96DB-0520167006F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CABCE44D-1BC1-465C-9B8A-B5A9C8D13A76}
