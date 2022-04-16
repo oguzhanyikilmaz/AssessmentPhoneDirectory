@@ -1,0 +1,6 @@
+{
+  "ContactApiHost": "http://localhost:18200/api/v1",
+  //"IdentityServerHost": "",
+
+  "MvcHost": "#{CLIENT_URL}#"
+}
