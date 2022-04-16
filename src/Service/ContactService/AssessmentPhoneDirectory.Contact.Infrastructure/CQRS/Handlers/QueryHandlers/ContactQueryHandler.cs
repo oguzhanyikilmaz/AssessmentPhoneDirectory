@@ -72,7 +72,7 @@ namespace AssessmentPhoneDirectory.Contact.Infrastructure.CQRS.Handlers.QueryHan
                     isCacheable = true;
                 }
 
-                if (request.Company.Any())
+                if (string.IsNullOrEmpty(request.Company))
                 {
                     cacheKey = cacheKey + $"_CP{string.Join('_', request.Company)}";
 

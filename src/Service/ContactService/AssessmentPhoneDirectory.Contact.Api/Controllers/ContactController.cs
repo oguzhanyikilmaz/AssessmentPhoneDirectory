@@ -14,14 +14,14 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
     [ApiController]
     public class ContactController : ControllerBase
     {
-        private readonly IContactManager _ContactManager;
+        private readonly IContactManager _contactManager;
         /// <summary>
         /// Provide search functions
         /// </summary>
         /// <param name="ContactManager"></param>
-        public ContactController(IContactManager ContactManager)
+        public ContactController(IContactManager contactManager)
         {
-            _ContactManager = ContactManager;
+            _contactManager = contactManager;
         }
         /// <summary>
         /// List
@@ -31,7 +31,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> List([FromQuery] ListContactQueryRequest requestModel)
         {
-            var result = await _ContactManager.GetAllContactAsync(requestModel);
+            var result = await _contactManager.GetAllContactAsync(requestModel);
             if (result == null || !result.Any())
                 return NotFound();
 
@@ -50,7 +50,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
                 Id = id
             };
 
-            var result = await _ContactManager.GetContactAsync(requestModel);
+            var result = await _contactManager.GetContactAsync(requestModel);
             if (result == null)
                 return NotFound();
 
@@ -60,7 +60,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
         [HttpPost("ContactAll")]
         public async Task<IActionResult> ListRelation([FromBody] ListContactQueryRequest request)
         {
-            var result = await _ContactManager.GetAllContactAsync(request);
+            var result = await _contactManager.GetAllContactAsync(request);
             if (result == null || !result.Any())
                 return NotFound();
 
@@ -74,7 +74,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
         [HttpPost("NewContact")]
         public async Task<IActionResult> Post([FromBody] CreateContactCommandRequest requestModel)
         {
-            var result = await _ContactManager.CreateContactAsync(requestModel);
+            var result = await _contactManager.CreateContactAsync(requestModel);
             if (result == null)
                 return NotFound();
 
@@ -88,7 +88,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateContactCommandRequest requestModel)
         {
-            var result = await _ContactManager.UpdateContactAsync(requestModel);
+            var result = await _contactManager.UpdateContactAsync(requestModel);
             if (result == null)
                 return NotFound();
 
@@ -107,7 +107,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
                 Id = id
             };
 
-            var result = await _ContactManager.DeleteContactAsync(requestModel);
+            var result = await _contactManager.DeleteContactAsync(requestModel);
 
             if (result == null)
                 return NotFound();

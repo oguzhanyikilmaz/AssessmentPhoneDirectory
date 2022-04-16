@@ -14,10 +14,10 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
     [ApiController]
     public class ContactInfoController : ControllerBase
     {
-        private readonly IContactInfoManager _ContactInfoManager;
-        public ContactInfoController(IContactInfoManager ContactInfo)
+        private readonly IContactInfoManager _contactInfoManager;
+        public ContactInfoController(IContactInfoManager contactInfo)
         {
-            _ContactInfoManager = ContactInfo;
+            _contactInfoManager = contactInfo;
         }
         /// <summary>
         /// List
@@ -27,7 +27,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> List([FromQuery] ListContactInfoQueryRequest requestModel)
         {
-            var result = await _ContactInfoManager.GetAllContactInfoAsync(requestModel);
+            var result = await _contactInfoManager.GetAllContactInfoAsync(requestModel);
             if (result == null || !result.Any())
                 return NotFound();
 
@@ -46,7 +46,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
                 Id = id
             };
 
-            var result = await _ContactInfoManager.GetContactInfoAsync(requestModel);
+            var result = await _contactInfoManager.GetContactInfoAsync(requestModel);
             if (result == null)
                 return NotFound();
 
@@ -60,7 +60,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateContactInfoCommandRequest requestModel)
         {
-            var result = await _ContactInfoManager.CreateContactInfoAsync(requestModel);
+            var result = await _contactInfoManager.CreateContactInfoAsync(requestModel);
             if (result == null)
                 return NotFound();
 
@@ -74,7 +74,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateContactInfoCommandRequest requestModel)
         {
-            var result = await _ContactInfoManager.UpdateContactInfoAsync(requestModel);
+            var result = await _contactInfoManager.UpdateContactInfoAsync(requestModel);
             if (result == null)
                 return NotFound();
 
@@ -93,7 +93,7 @@ namespace AssessmentPhoneDirectory.Contact.Api.Controllers
                 Id = id
             };
 
-            var result = await _ContactInfoManager.DeleteContactInfoAsync(requestModel);
+            var result = await _contactInfoManager.DeleteContactInfoAsync(requestModel);
 
             if (result == null)
                 return NotFound();

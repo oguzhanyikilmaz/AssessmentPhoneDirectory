@@ -34,6 +34,7 @@ namespace AssessmentPhoneDirectory.Contact.Infrastructure.CQRS.Handlers.CommandH
             var ContactInfo = _mapper.Map<ContactInfo>(request);
             ContactInfo.CreatedDate = DateTime.Now;
             ContactInfo.UpdatedDate = DateTime.Now;
+            ContactInfo.IsActive = "true";
 
             await _context.ContactInfo.InsertOneAsync(ContactInfo, cancellationToken: cancellationToken);
             await _redisCache.Db0.RemoveAsync("contactInfo");
