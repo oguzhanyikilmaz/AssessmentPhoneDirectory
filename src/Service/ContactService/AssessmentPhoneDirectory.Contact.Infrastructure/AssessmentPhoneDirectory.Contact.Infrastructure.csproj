@@ -4,4 +4,17 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="CQRS\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
+    <PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="8.0.4" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Core" Version="8.0.4" />
+  </ItemGroup>
+
 </Project>
