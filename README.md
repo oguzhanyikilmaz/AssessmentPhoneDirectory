@@ -17,6 +17,9 @@ products:
 # ASP.NET Core API and Microservice project
 The project should be started by selecting multiple startup projects from the Solution properties and then selecting the apies options.
 
+- The project was created with .NET 5.0 Required packages for Depepndency Injection have been installed.
+- CQRS was used for insertion deletion update operations.
+- Repository design pattern is used for Excel creation and Queue services.
 - Adding, deleting, updating contacts should be done using ContactApi.
 - Afterwards, a report request should be sent using the report service.
 - This service first sends this data to the **SendQueue** method of the service (QueueService) using RabbitMQ, by sending a request to the **ContactAll** method, going to the Contact service and pulling the Contact information, and it is put into the queue. The Queue service creates a queue and makes a request to the **CreateReport** method in the JobService layer with the incoming json data.
