@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AssessmentPhoneDirectory.QueueService.Api.Refit.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AssessmentPhoneDirectory.Report.Api;
 using Refit;
 using System;
-using AssessmentPhoneDirectory.Report.Api.Refit.Interfaces;
 
-namespace AssessmentPhoneDirectory.Report.Api
+namespace AssessmentPhoneDirectory.QueueService.Api
 {
     public class RefitApiServiceDependency
     {
@@ -43,12 +42,10 @@ namespace AssessmentPhoneDirectory.Report.Api
 
 
 
-        private IContactApi _ContactApi { get => ServiceProvider.GetRequiredService<IContactApi>(); }
-        private IQueueApi _QueueApi { get => ServiceProvider.GetRequiredService<IQueueApi>(); }
+        private IJobApi _JobApi { get => ServiceProvider.GetRequiredService<IJobApi>(); }
 
         //Exposed public static props via RefitApiServiceDependency.Shared 
-        public static IContactApi ContactApi { get => Shared._ContactApi; }
-        public static IQueueApi QueueApi { get => Shared._QueueApi; }
+        public static IJobApi JobApi { get => Shared._JobApi; }
 
 
 
@@ -82,15 +79,7 @@ namespace AssessmentPhoneDirectory.Report.Api
 
             var baseaddress = new Uri("http://localhost:44370/api");
 
-            services.AddRefitClient<IContactApi>()
-            .ConfigureHttpClient(c =>
-            {
-                c.BaseAddress = baseaddress;
-            });
-            //.AddHttpMessageHandler<AuthTokenHandler>()
-            //.AddTransientHttpErrorPolicy(p => p.RetryAsync());
-
-            services.AddRefitClient<IQueueApi>()
+            services.AddRefitClient<IJobApi>()
             .ConfigureHttpClient(c =>
             {
                 c.BaseAddress = new Uri("http://localhost:44395/api");

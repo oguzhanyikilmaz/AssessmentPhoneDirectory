@@ -44,15 +44,15 @@ namespace AssessmentPhoneDirectory.Report.Api.Controllers
                 };
                 var result = await _reportManager.CreateReportAsync(createReportCommandRequest);
 
-                var resultExcelReport = await RefitApiServiceDependency.JobApi.CreateReport(resultContactReport.ToList());
-
+                var sendQueueResult = await RefitApiServiceDependency.QueueApi.SendQueue(resultContactReport.ToList());
+                var consumeQueueResult = await RefitApiServiceDependency.QueueApi.ConsumeQueue();
                 UpdateReportCommandRequest updateReportCommandRequest = new UpdateReportCommandRequest()
                 {
                     Id = result.Id,
                     ReportStatus = "Hazırlanıyor."
                 };
 
-                if (!resultExcelReport)
+                if (!consumeQueueResult)
                 {
                     updateReportCommandRequest.ReportStatus = "Hata Alındı.";
                     var resultUpdateReportCommandRequestError = await _reportManager.UpdateReportAsync(updateReportCommandRequest);

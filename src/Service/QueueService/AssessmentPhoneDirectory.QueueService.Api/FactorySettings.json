@@ -1,0 +1,6 @@
+{
+  "JobApiHost": "http://localhost:44370/api",
+  //"IdentityServerHost": "",
+
+  "MvcHost": "#{CLIENT_URL}#"
+}

@@ -1,4 +1,4 @@
-﻿using AssessmentPhoneDirectory.Report.Api.Models.Response;
+﻿using AssessmentPhoneDirectory.QueueService.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AssessmentPhoneDirectory.Report.Api.Refit.Interfaces
+namespace AssessmentPhoneDirectory.QueueService.Api.Refit.Interfaces
 {
     public interface IJobApi 
     {
