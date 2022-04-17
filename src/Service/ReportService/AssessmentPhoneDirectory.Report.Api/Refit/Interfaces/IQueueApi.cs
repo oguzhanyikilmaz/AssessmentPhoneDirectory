@@ -11,10 +11,10 @@ namespace AssessmentPhoneDirectory.Report.Api.Refit.Interfaces
 {
     public interface IQueueApi 
     {
-        [Post("/SendQueue")]
+        [Post("/Queue/SendQueue")]
         Task<bool> SendQueue([FromBody] List<ListContactQueryResponse> requestModel);
 
-        [Get("/ConsumeQueue")]
+        [Get("/Queue/ConsumeQueue")]
         Task<bool> ConsumeQueue();
     }
 }

@@ -23,7 +23,7 @@ namespace AssessmentPhoneDirectory.QueueService.Api.Controllers
             _queueService = queueService;
         }
 
-        [HttpPost]
+        [HttpPost("SendQueue")]
         public async Task<bool> SendQueue([FromBody] List<ListContactQueryResponse> requestModel)
         {
             bool retVal = true;

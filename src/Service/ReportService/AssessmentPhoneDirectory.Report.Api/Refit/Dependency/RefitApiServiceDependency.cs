@@ -93,7 +93,7 @@ namespace AssessmentPhoneDirectory.Report.Api
             services.AddRefitClient<IQueueApi>()
             .ConfigureHttpClient(c =>
             {
-                c.BaseAddress = new Uri("https://localhost:44395/api");
+                c.BaseAddress = new Uri("https://localhost:44359/api");
             });
 
         }

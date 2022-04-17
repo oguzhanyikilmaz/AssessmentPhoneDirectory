@@ -27,7 +27,7 @@ namespace AssessmentPhoneDirectory.QueueService.Business.Concrete
         {
             var connectionFactory = new ConnectionFactory()
             {
-                Uri = new Uri("")
+                Uri = new Uri("amqp://guest:guest@localhost:15672")
             };
 
             return connectionFactory.CreateConnection();
