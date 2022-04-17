@@ -27,8 +27,8 @@ namespace AssessmentPhoneDirectory.JobService.Api.Controllers
         /// </summary>
         /// <param name="requestModel"></param>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<bool> CreateReport([FromQuery] List<ListContactQueryResponse> requestModel)
+        [HttpPost]
+        public async Task<bool> CreateReport([FromBody] List<ListContactQueryResponse> requestModel)
         {
            bool result= _repository.Create(requestModel);
             if (!result)

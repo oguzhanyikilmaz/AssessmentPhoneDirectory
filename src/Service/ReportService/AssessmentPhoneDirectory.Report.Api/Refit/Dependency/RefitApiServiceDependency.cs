@@ -80,7 +80,7 @@ namespace AssessmentPhoneDirectory.Report.Api
             var config = configBuilder.Build();
             services.Configure<AppSettings>(config);
 
-            var baseaddress = new Uri("http://localhost:18200/api/v1");
+            var baseaddress = new Uri("http://localhost:44370/api");
 
             services.AddRefitClient<IContactApi>()
             .ConfigureHttpClient(c =>
@@ -93,7 +93,7 @@ namespace AssessmentPhoneDirectory.Report.Api
             services.AddRefitClient<IJobApi>()
             .ConfigureHttpClient(c =>
             {
-                c.BaseAddress = baseaddress;
+                c.BaseAddress = new Uri("http://localhost:44395/api");
             });
 
         }

@@ -33,36 +33,42 @@ namespace AssessmentPhoneDirectory.Report.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateReport([FromQuery] ListContactQueryRequest requestModel)
         {
-           var contactReport= RefitApiServiceDependency.ContactApi.List(requestModel);
-
-            CreateReportCommandRequest createReportCommandRequest = new CreateReportCommandRequest()
+            var resultContactReport = await RefitApiServiceDependency.ContactApi.List(requestModel);
+            if (resultContactReport != null && resultContactReport.Count() > 0)
             {
-                GetReportDate = DateTime.Now.ToString("U"),
-                ReportStatus="Başladı.",
-            };
-            var result = await _reportManager.CreateReportAsync(createReportCommandRequest);
+                CreateReportCommandRequest createReportCommandRequest = new CreateReportCommandRequest()
+                {
+                    GetReportDate = DateTime.Now.ToString("U"),
+                    ReportStatus = "Başladı.",
+                };
+                var result = await _reportManager.CreateReportAsync(createReportCommandRequest);
 
-            var excelReport = RefitApiServiceDependency.JobApi.CreateReport(contactReport.Result.ToList());
+                var resultExcelReport = await RefitApiServiceDependency.JobApi.CreateReport(resultContactReport.ToList());
 
-            UpdateReportCommandRequest updateReportCommandRequest = new UpdateReportCommandRequest()
+                UpdateReportCommandRequest updateReportCommandRequest = new UpdateReportCommandRequest()
+                {
+                    Id = result.Id,
+                    ReportStatus = "Hazırlanıyor."
+                };
+
+                if (!resultExcelReport)
+                {
+                    updateReportCommandRequest.ReportStatus = "Hata Alındı.";
+                    var resultUpdateReportCommandRequestError = await _reportManager.UpdateReportAsync(updateReportCommandRequest);
+                    return NotFound();
+                }
+
+                var resultUpdateReportCommandRequestStart = await _reportManager.UpdateReportAsync(updateReportCommandRequest);
+
+                updateReportCommandRequest.ReportStatus = "Tamamlandı.";
+                var resultUpdateReportCommandRequestCompleted = await _reportManager.UpdateReportAsync(updateReportCommandRequest);
+                return StatusCode(201, result);
+
+            }
+            else
             {
-                Id = result.Id,
-                ReportStatus = "Hazırlanıyor."
-            };
-            var resultUpdateReportCommandRequestStart = await _reportManager.UpdateReportAsync(updateReportCommandRequest);
-
-
-            if (!excelReport.Result)
-            {
-                updateReportCommandRequest.ReportStatus = "Hata Alındı.";
-                var resultUpdateReportCommandRequestError = await _reportManager.UpdateReportAsync(updateReportCommandRequest);
                 return NotFound();
             }
-
-            updateReportCommandRequest.ReportStatus = "Tamamlandı.";
-            var resultUpdateReportCommandRequestCompleted = await _reportManager.UpdateReportAsync(updateReportCommandRequest);
-
-            return StatusCode(201, result);
         }
     }
 }

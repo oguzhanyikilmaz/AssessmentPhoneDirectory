@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis.Extensions.Core.Configuration;
+using StackExchange.Redis.Extensions.System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,11 +35,27 @@ namespace AssessmentPhoneDirectory.Report.Api
             services.AddScoped<IReportManager, ReportManager>();
             services.AddSingleton<MongoDBContext>();
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AssessmentPhoneDirectory.Report.Api", Version = "v1" });
             });
+
+            var provider = services.BuildServiceProvider();
+            var configuration = provider.GetService<IConfiguration>();
+            var conf = new RedisConfiguration
+            {
+                ConnectionString = configuration.GetConnectionString("Redis"),
+                ServerEnumerationStrategy = new ServerEnumerationStrategy
+                {
+                    Mode = ServerEnumerationStrategy.ModeOptions.All,
+                    TargetRole = ServerEnumerationStrategy.TargetRoleOptions.Any,
+                    UnreachableServerAction = ServerEnumerationStrategy.UnreachableServerActionOptions.Throw
+                }
+            };
+
+            services.AddStackExchangeRedisExtensions<SystemTextJsonSerializer>(conf);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AssessmentPhoneDirectory.Jobservice.BusinessLayer.Helpers;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
@@ -27,25 +29,25 @@ namespace AssessmentPhoneDirectory.Jobservice.BusinessLayer.UnitOfWork.Repositor
         {
             try
             {
-                _xlWorkSheet.Cells[1, 1] = "FirstName";
-                _xlWorkSheet.Cells[1, 2] = "LastName";
-                _xlWorkSheet.Cells[1, 3] = "Company";
-                _xlWorkSheet.Cells[1, 4] = "InfoType";
-                _xlWorkSheet.Cells[1, 4] = "InfoDescription";
+                _xlWorkSheet.Cells[1, 1] = "Konum Bilgisi";
+                _xlWorkSheet.Cells[1, 2] = "Konumdaki Kişi Sayısı";
+                _xlWorkSheet.Cells[1, 3] = "Konumdaki Telefon Numarası Sayısı";
 
-                for (int i = 1; i <= entity[i].ContactInfos.Count(); i++)
+
+                var contactInfoQueryResponses = CHelper.GetContactInfo(entity);
+
+                var groupByContactInfos = contactInfoQueryResponses.Where(x => x.InfoType.ToLower() == "konum").GroupBy(z=>z.InfoDescription).ToList();
+
+                for (int i = 1; i <= groupByContactInfos.Count(); i++)
                 {
-                    foreach (var contactInfo in entity[i].ContactInfos)
-                    {
-                        _xlWorkSheet.Cells[i, 1] = entity[i].FirstName;
-                        _xlWorkSheet.Cells[i, 2] = entity[i].LastName;
-                        _xlWorkSheet.Cells[i, 3] = entity[i].Company;
-                        _xlWorkSheet.Cells[i, 4] = contactInfo.InfoType;
-                        _xlWorkSheet.Cells[i, 5] = contactInfo.InfoDescription;
-                    }
+                    _xlWorkSheet.Cells[i+1, 1] = groupByContactInfos[i-1].Key.ToString();
+                    _xlWorkSheet.Cells[i + 1, 2] = CHelper.GetContactInfoGroupByLocationCount(contactInfoQueryResponses, groupByContactInfos[i - 1].Key.ToString());
+                    _xlWorkSheet.Cells[i+1, 3] = CHelper.GetContactInfoGroupByPhoneCount(contactInfoQueryResponses, groupByContactInfos[i - 1].Key.ToString());
                 }
 
-                _xlWorkBook.SaveAs("D:\\deneme-dosya.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal, _misValue, _misValue, _misValue, _misValue, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, _misValue, _misValue, _misValue, _misValue, _misValue);
+                string path = CHelper.GetPath();
+
+                _xlWorkBook.SaveAs(path, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal, _misValue, _misValue, _misValue, _misValue, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, _misValue, _misValue, _misValue, _misValue, _misValue); ;
                 _xlWorkBook.Close(true, _misValue, _misValue);
                 _xlApp.Quit();
 
