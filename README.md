@@ -2,7 +2,7 @@
 languages:
 - csharp
 page_type: sample
-description: "The project should be started by selecting multiple startup projects from the Solution properties and then selecting the Case Study.Api and CaseStudy.Web options."
+description: "The project should be started by selecting multiple startup projects from the Solution properties and then selecting the apies options."
 products:
 - aspnet-core-api
 - aspnet-core
