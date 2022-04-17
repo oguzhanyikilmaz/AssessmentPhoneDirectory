@@ -19,10 +19,10 @@ The project should be started by selecting multiple startup projects from the So
 
 - Adding, deleting, updating contacts should be done using ContactApi.
 - Afterwards, a report request should be sent using the report service.
-- This service firstly goes to the Contact service and retrieves Contact information, sends this data to the service using RabbitMQ and queues it up. Queue service creates a queue and requests the incoming json data to the JobService layer.
+- This service first sends this data to the **SendQueue** method of the service (QueueService) using RabbitMQ, by sending a request to the **ContactAll** method, going to the Contact service and pulling the Contact information, and it is put into the queue. The Queue service creates a queue and makes a request to the **CreateReport** method in the JobService layer with the incoming json data.
 - As stated in Assesment, JobService creates a report information with the incoming data and saves it in the folder it is in.
 - If there is no error during excel creation, it returns true.
-- Our Queue service consumes this value and consumes it as reportCreated.
+- Our Queue service consumes this value with **ConsumeQueue** method and consumer it as reportCreated.
 
 * Method names are shown in bold.
 
