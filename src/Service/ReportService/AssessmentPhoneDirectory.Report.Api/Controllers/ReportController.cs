@@ -33,7 +33,8 @@ namespace AssessmentPhoneDirectory.Report.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateReport([FromQuery] ListContactQueryRequest requestModel)
         {
-            var resultContactReport = await RefitApiServiceDependency.ContactApi.List(requestModel);
+            var resultContactReport =  RefitApiServiceDependency.ContactApi.List(requestModel);
+
             if (resultContactReport != null && resultContactReport.Count() > 0)
             {
                 CreateReportCommandRequest createReportCommandRequest = new CreateReportCommandRequest()

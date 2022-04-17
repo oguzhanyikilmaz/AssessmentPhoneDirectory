@@ -10,7 +10,7 @@ namespace AssessmentPhoneDirectory.Report.Api
     [Headers("Content-Type: application/json; charset=UTF-8")]
     public interface IContactApi
     {
-        [Get("/List")]
+        [Get("/ContactAll")]
         Task<IEnumerable<ListContactQueryResponse>> List([FromBody] ListContactQueryRequest requestModel);    
     }
 }
