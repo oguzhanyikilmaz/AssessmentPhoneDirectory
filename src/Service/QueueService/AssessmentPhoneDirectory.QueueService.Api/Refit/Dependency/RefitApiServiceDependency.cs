@@ -77,12 +77,12 @@ namespace AssessmentPhoneDirectory.QueueService.Api
             var config = configBuilder.Build();
             services.Configure<AppSettings>(config);
 
-            var baseaddress = new Uri("http://localhost:44370/api");
+            var baseaddress = new Uri("https://localhost:44370/api");
 
             services.AddRefitClient<IJobApi>()
             .ConfigureHttpClient(c =>
             {
-                c.BaseAddress = new Uri("http://localhost:44395/api");
+                c.BaseAddress = new Uri("https://localhost:44395/api");
             });
 
         }

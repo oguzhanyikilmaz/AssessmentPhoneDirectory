@@ -11,7 +11,7 @@ namespace AssessmentPhoneDirectory.QueueService.Api.Refit.Interfaces
 {
     public interface IJobApi 
     {
-        [Get("/CreateReport")]
+        [Post("/CreateReport")]
         Task<bool> CreateReport([FromBody] List<ListContactQueryResponse> requestModel);
     }
 }
